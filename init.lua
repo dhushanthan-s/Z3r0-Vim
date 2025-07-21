@@ -1,0 +1,6 @@
+require("config.options")
+require("config.keymaps")
+require("config.lazy")
+require("config.autopairs")
+require("config.bufferline")
+require("config.autocmds")
