@@ -46,5 +46,3 @@
 `<Shift-h>` - Shift to left buffer  
   
 `<Shift-l>` - Shift to right buffer
-
-[Back to homepage](../../../../README.md)
