@@ -18,7 +18,9 @@ return {
         "williamboman/mason-lspconfig.nvim", -- https://github.com/williamboman/mason-lspconfig.nvim
         config = function ()
             require("mason-lspconfig").setup({
-                ensure_installed = { "clangd", "cmake", "lua_ls", "bashls", "quick_lint_js", "rust_analyzer", "marksman", "pylsp", "jsonls", "html", "cssls" },
+                -- TODO: before launching separate nvim distribution
+                -- make only {Lua, Python, JSON, Bash} lsps the default
+                ensure_installed = { "lua_ls", "bashls", "marksman", "pylsp" },
                 automatic_installation = true,
             })
         end
@@ -57,10 +59,10 @@ return {
                 buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
                 buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
                 buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-                buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+                buf_set_keymap('n', '<space>E', function () vim.diagnostic.open_float(nil, { focusable = true}) end, opts)
                 buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
                 buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-                -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+                buf_set_keymap('n', 'q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
                 buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
             end
