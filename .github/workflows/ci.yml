@@ -1,10 +1,11 @@
+
 name: Z3r0-Vim Config CI
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
 
 jobs:
   test-config:
@@ -19,7 +20,7 @@ jobs:
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
-          version: release
+          version: stable
 
       - name: Install dependencies
         run: |
@@ -34,13 +35,11 @@ jobs:
 
       - name: Lint Lua (including ftplugin)
         run: |
-          luacheck nvim/ \
-            --exclude-files "*/packer_compiled.lua" \
-            --exclude-files "*/lazy-lock.json"
+          luacheck . --config .luacheckrc
 
       - name: Stylua check (including ftplugin)
         run: |
-          stylua --check nvim/
+          stylua --check .
 
       - name: Headless Neovim startup (Lazy sync)
         run: |
@@ -48,7 +47,7 @@ jobs:
 
       - name: Test ftplugin files in headless Neovim
         run: |
-          for file in $(find nvim/ -type f -path '*/ftplugin/*.lua'); do
+          for file in $(find ./ftplugin -type f -path '*.lua'); do
             filetype=$(basename "$file" .lua)
             echo "🔍 Testing ftplugin for filetype: $filetype"
             nvim --headless +"set ft=$filetype" +qa || exit 1
