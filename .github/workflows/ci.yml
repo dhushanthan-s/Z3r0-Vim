@@ -1,0 +1,59 @@
+name: Z3r0-Vim Config CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-config:
+    name: Lint, format, and test config
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Neovim
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: release
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y luarocks unzip
+          sudo luarocks install luacheck
+
+          curl -L https://github.com/JohnnyMorganz/StyLua/releases/download/v0.20.0/stylua-linux-x86_64.zip -o stylua.zip
+          unzip stylua.zip -d ./stylua-bin
+          sudo mv ./stylua-bin/stylua /usr/local/bin/stylua
+          stylua --version
+
+      - name: Lint Lua (including ftplugin)
+        run: |
+          luacheck nvim/ \
+            --exclude-files "*/packer_compiled.lua" \
+            --exclude-files "*/lazy-lock.json"
+
+      - name: Stylua check (including ftplugin)
+        run: |
+          stylua --check nvim/
+
+      - name: Headless Neovim startup (Lazy sync)
+        run: |
+          nvim --headless "+Lazy! sync" +qa
+
+      - name: Test ftplugin files in headless Neovim
+        run: |
+          for file in $(find nvim/ -type f -path '*/ftplugin/*.lua'); do
+            filetype=$(basename "$file" .lua)
+            echo "🔍 Testing ftplugin for filetype: $filetype"
+            nvim --headless +"set ft=$filetype" +qa || exit 1
+          done
+
+      - name: Run healthcheck (optional)
+        run: |
+          nvim --headless "+checkhealth" +qa
