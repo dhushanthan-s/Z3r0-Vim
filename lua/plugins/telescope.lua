@@ -36,57 +36,98 @@ return {
                 -- * global (default)
                 -- * tab
                 -- * win
-                scope_chdir = 'global',
+                scope_chdir = "global",
 
                 -- Path where project.nvim will store the project history for use in
                 -- telescope
                 datapath = vim.fn.stdpath("data"),
-            }) 
-        end
+            })
+        end,
     },
     {
         "nvim-telescope/telescope.nvim", -- https://github.com/nvim-telescope/telescope.nvim
-        tag = '0.1.8',
-        dependencies = { 'nvim-lua/plenary.nvim' }, -- https://github.com/nvim-lua/plenary.nvim
+        tag = "0.1.8",
+        dependencies = { "nvim-lua/plenary.nvim" }, -- https://github.com/nvim-lua/plenary.nvim
         config = function()
             local builtin = require("telescope.builtin")
-            vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Search files", noremap = true, silent = true })
-            vim.keymap.set("n", "<leader>FF", function ()
-                builtin.find_files {
-                    hidden = true
-                } 
-            end, { desc = "Search files with hidden files", noremap = true, silent = true })
-            vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Search code", noremap = true, silent = true })
-            vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "Find Reference", noremap = true, silent = true })
-            vim.keymap.set("n", "<leader>fd", builtin.lsp_definitions, { desc = "Find Definition", noremap = true, silent = true })
-            vim.keymap.set("n", "<leader>fi", builtin.lsp_implementations, { desc = "Find Implementation", noremap = true, silent = true })
-        end
+            vim.keymap.set(
+                "n",
+                "<leader>ff",
+                builtin.find_files,
+                { desc = "Search files", noremap = true, silent = true }
+            )
+            vim.keymap.set("n", "<leader>FF", function()
+                builtin.find_files({
+                    hidden = true,
+                })
+            end, {
+                desc = "Search files with hidden files",
+                noremap = true,
+                silent = true,
+            })
+            vim.keymap.set(
+                "n",
+                "<leader>fg",
+                builtin.live_grep,
+                { desc = "Search code", noremap = true, silent = true }
+            )
+            vim.keymap.set(
+                "n",
+                "<leader>fr",
+                builtin.lsp_references,
+                { desc = "Find Reference", noremap = true, silent = true }
+            )
+            vim.keymap.set(
+                "n",
+                "<leader>fd",
+                builtin.lsp_definitions,
+                { desc = "Find Definition", noremap = true, silent = true }
+            )
+            vim.keymap.set(
+                "n",
+                "<leader>fi",
+                builtin.lsp_implementations,
+                { desc = "Find Implementation", noremap = true, silent = true }
+            )
+        end,
     },
     {
-        'nvim-telescope/telescope-media-files.nvim', -- https://github.com/nvim-telescope/telescope-media-files.nvim
-        dependencies = { 'nvim-lua/popup.nvim' },
+        "nvim-telescope/telescope-media-files.nvim", -- https://github.com/nvim-telescope/telescope-media-files.nvim
+        dependencies = { "nvim-lua/popup.nvim" },
     },
     {
-        'nvim-telescope/telescope-ui-select.nvim', -- https://github.com/nvim-telescope/telescope-ui-select.nvim
-        config = function ()
+        "nvim-telescope/telescope-ui-select.nvim", -- https://github.com/nvim-telescope/telescope-ui-select.nvim
+        config = function()
             require("telescope").setup({
+                defaults = {
+                    file_ignore_patterns = {
+                        "node_modules/",
+                        ".git/",
+                        "target/",
+                        ".nvim/",
+                        ".vscode/",
+                        ".idea/",
+                        ".gradle/",
+                        ".zed/",
+                        "pycache/",
+                    },
+                },
                 extensions = {
                     ["ui-select"] = {
-                        require("telescope.themes").get_dropdown {
-                        }
+                        require("telescope.themes").get_dropdown({}),
                     },
                     media_files = {
                         -- filetypes whitelist
                         -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-                        filetypes = {"png", "webp", "jpg", "jpeg"},
+                        filetypes = { "png", "webp", "jpg", "jpeg" },
                         -- find command (defaults to `fd`)
-                        find_cmd = "rg"
-                    }
-                }
+                        find_cmd = "rg",
+                    },
+                },
             })
             require("telescope").load_extension("ui-select")
             require("telescope").load_extension("projects")
-            require('telescope').load_extension('media_files')
-        end
+            require("telescope").load_extension("media_files")
+        end,
     },
 }

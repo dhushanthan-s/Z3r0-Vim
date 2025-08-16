@@ -1,12 +1,12 @@
 return {
     {
         "mfussenegger/nvim-lint",
-        config = function ()
+        config = function()
             vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-                callback = function ()
+                callback = function()
                     require("lint").try_lint()
-                end
+                end,
             })
-        end
-    }
+        end,
+    },
 }

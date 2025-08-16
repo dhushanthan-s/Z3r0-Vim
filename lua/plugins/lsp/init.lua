@@ -1,3 +1,3 @@
 return {
-    { import = "plugins.lsp.language" }
+    { import = "plugins.lsp.language" },
 }

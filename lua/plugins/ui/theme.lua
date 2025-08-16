@@ -7,10 +7,12 @@ return {
                 transparent = true,
             })
             vim.cmd.colorscheme("kanagawa-wave")
-        end
+        end,
     },
     {
-        "catppuccin/nvim", name = "catppuccin", priority = 1000, -- https://github.com/catppuccin/nvim
+        "catppuccin/nvim",
+        name = "catppuccin",
+        priority = 1000, -- https://github.com/catppuccin/nvim
         config = function()
             require("catppuccin").setup({
                 flavor = "mocha",
@@ -45,11 +47,9 @@ return {
                         },
                     },
                     which_key = false,
-
-                }
+                },
             })
             vim.cmd.colorscheme("catppuccin")
-        end
-
+        end,
     },
 }

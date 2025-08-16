@@ -57,7 +57,6 @@ map("v", "<A-j>", ":m .+1<CR>==", opts)
 map("v", "<A-k>", ":m .-2<CR>==", opts)
 map("v", "p", '"_dP', opts)
 
-
 -- Visual Block --
 -- Move text up and down
 map("x", "J", ":move '>+1<CR>gv-gv", opts)
@@ -73,4 +72,4 @@ map("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 map("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- Lazygit
-map("n", "<leader>gg", ":LazyGit<CR>",opts)
+map("n", "<leader>gg", ":LazyGit<CR>", opts)

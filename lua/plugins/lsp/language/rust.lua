@@ -1,22 +1,35 @@
 return {
     {
-        'mrcjkb/rustaceanvim', -- https://github.com/mrcjkb/rustaceanvim
-        version = '^5', -- Recommended
+        "mrcjkb/rustaceanvim", -- https://github.com/mrcjkb/rustaceanvim
+        version = "^5", -- Recommended
         lazy = false, -- This plugin is already lazy
     },
     {
 
         "simrat39/rust-tools.nvim", -- https://github.com/simrat39/rust-tools.nvim
-        config = function ()
+        config = function()
             local rt = require("rust-tools")
 
             rt.setup({
                 server = {
+                    -- standalone file support
+                    -- setting it to false may improve startup time
+                    standalone = true,
                     on_attach = function(_, bufnr)
                         -- Hover actions
-                        vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+                        vim.keymap.set(
+                            "n",
+                            "<C-space>",
+                            rt.hover_actions.hover_actions,
+                            { buffer = bufnr }
+                        )
                         -- Code action groups
-                        vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+                        vim.keymap.set(
+                            "n",
+                            "<Leader>a",
+                            rt.code_action_group.code_action_group,
+                            { buffer = bufnr }
+                        )
                     end,
                 },
                 tools = { -- rust-tools options
@@ -177,11 +190,6 @@ return {
                 -- all the opts to send to nvim-lspconfig
                 -- these override the defaults set by rust-tools.nvim
                 -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
-                server = {
-                    -- standalone file support
-                    -- setting it to false may improve startup time
-                    standalone = true,
-                }, -- rust-analyzer options
 
                 -- debugging stuff
                 dap = {
@@ -190,9 +198,8 @@ return {
                         command = "lldb-vscode",
                         name = "rt_lldb",
                     },
-                }
-
+                },
             })
-        end
-    }
+        end,
+    },
 }
