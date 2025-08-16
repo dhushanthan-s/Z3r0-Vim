@@ -10,70 +10,89 @@ return {
                 },
             },
         },
-        config = function ()
+        config = function()
             require("mason").setup()
-        end
+        end,
     },
     {
         "williamboman/mason-lspconfig.nvim", -- https://github.com/williamboman/mason-lspconfig.nvim
-        config = function ()
+        config = function()
             require("mason-lspconfig").setup({
                 -- TODO: before launching separate nvim distribution
                 -- make only {Lua, Python, JSON, Bash} lsps the default
                 ensure_installed = { "lua_ls", "bashls", "marksman", "pylsp" },
                 automatic_installation = true,
             })
-        end
+        end,
     },
     {
         "neovim/nvim-lspconfig", -- https://github.com/neovim/nvim-lspconfig
-        config = function ()
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
+        config = function()
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
             local lspconfig = require("lspconfig")
             local opts = { noremap = true, silent = true }
             lspconfig.lua_ls.setup({
-                capabilities = capabilities
+                capabilities = capabilities,
             })
             -- TODO: add more lsp configs
 
             local on_attach = function(client, bufnr)
-                local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-                local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+                local function buf_set_keymap(...)
+                    vim.api.nvim_buf_set_keymap(bufnr, ...)
+                end
+                local function buf_set_option(...)
+                    vim.api.nvim_buf_set_option(bufnr, ...)
+                end
 
                 --Enable completion triggered by <c-x><c-o>
-                buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+                buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
                 -- Mappings.
                 -- See `:help vim.lsp.*` for documentation on any of the below functions
-                buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-                buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-                buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-                buf_set_keymap('n', '<leader>i', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-                buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-                buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-                buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-                buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-                buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-                buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-                buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-                buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-                buf_set_keymap('n', '<space>E', function () vim.diagnostic.open_float(nil, { focusable = true}) end, opts)
-                buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-                buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-                buf_set_keymap('n', 'q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+                buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+                buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+                buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+                buf_set_keymap("n", "<leader>i", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+                buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+                buf_set_keymap(
+                    "n",
+                    "<space>wa",
+                    "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
+                    opts
+                )
+                buf_set_keymap(
+                    "n",
+                    "<space>wr",
+                    "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",
+                    opts
+                )
+                buf_set_keymap(
+                    "n",
+                    "<space>wl",
+                    "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
+                    opts
+                )
+                buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+                buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+                buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+                buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+                buf_set_keymap("n", "<space>E", function()
+                    vim.diagnostic.open_float(nil, { focusable = true })
+                end, opts)
+                buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
+                buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
+                buf_set_keymap("n", "q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
                 buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-
             end
 
             -- Use a loop to conveniently call 'setup' on multiple servers and
             -- map buffer local keybindings when the language server attaches
             local servers = { "pyright", "rust_analyzer", "bashls", "quick_lint_js" }
             for _, lsp in ipairs(servers) do
-                lspconfig[lsp].setup { on_attach = on_attach }
+                lspconfig[lsp].setup({ on_attach = on_attach })
             end
 
             -- vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-
-        end
+        end,
     },
 }

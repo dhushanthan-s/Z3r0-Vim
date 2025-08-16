@@ -1,14 +1,14 @@
 return {
     {
-        "nvim-neotest/nvim-nio" -- https://github.com/nvim-neotest/nvim-nio
+        "nvim-neotest/nvim-nio", -- https://github.com/nvim-neotest/nvim-nio
     },
     {
 
-        'mfussenegger/nvim-dap', -- https://github.com/mfussenegger/nvim-dap
+        "mfussenegger/nvim-dap", -- https://github.com/mfussenegger/nvim-dap
         dependencies = {
-            "rcarriga/nvim-dap-ui" -- https://github.com/rcarriga/nvim-dap-ui
+            "rcarriga/nvim-dap-ui", -- https://github.com/rcarriga/nvim-dap-ui
         },
-        config = function ()
+        config = function()
             local dap, dapui = require("dap"), require("dapui")
 
             dapui.setup({})
@@ -30,7 +30,7 @@ return {
             dap.adapters.gdb = {
                 type = "executable",
                 command = "gdb",
-                args = { "-i", "dap" }
+                args = { "-i", "dap" },
             }
             dap.configurations.c = {
                 {
@@ -38,7 +38,7 @@ return {
                     type = "gdb",
                     request = "launch",
                     program = function()
-                        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
                     end,
                     cwd = "${workspaceFolder}",
                     stopAtBeginningOfMainSubprogram = false,
@@ -50,16 +50,16 @@ return {
                     type = "gdb",
                     request = "launch",
                     program = function()
-                        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
                     end,
                     cwd = "${workspaceFolder}",
                     stopAtBeginningOfMainSubprogram = false,
                 },
             }
             dap.adapters.lldb = {
-                type = 'executable',
-                command = '/usr/bin/lldb-vscode', -- adjust as needed, must be absolute path
-                name = 'lldb'
+                type = "executable",
+                command = "/usr/bin/lldb-vscode", -- adjust as needed, must be absolute path
+                name = "lldb",
             }
             -- DAP for Rust
             dap.adapters.rust = {
@@ -72,14 +72,14 @@ return {
                     -- ... the previous config goes here ...,
                     initCommands = function()
                         -- Find out where to look for the pretty printer Python module.
-                        local rustc_sysroot = vim.fn.trim(vim.fn.system 'rustc --print sysroot')
+                        local rustc_sysroot = vim.fn.trim(vim.fn.system("rustc --print sysroot"))
                         assert(
-                        vim.v.shell_error == 0,
-                        'failed to get rust sysroot using `rustc --print sysroot`: '
-                        .. rustc_sysroot
+                            vim.v.shell_error == 0,
+                            "failed to get rust sysroot using `rustc --print sysroot`: "
+                                .. rustc_sysroot
                         )
-                        local script_file = rustc_sysroot .. '/lib/rustlib/etc/lldb_lookup.py'
-                        local commands_file = rustc_sysroot .. '/lib/rustlib/etc/lldb_commands'
+                        local script_file = rustc_sysroot .. "/lib/rustlib/etc/lldb_lookup.py"
+                        local commands_file = rustc_sysroot .. "/lib/rustlib/etc/lldb_commands"
 
                         -- The following is a table/list of lldb commands, which have a syntax
                         -- similar to shell commands.
@@ -111,15 +111,15 @@ return {
                 },
             }
 
-            vim.keymap.set('n', '<F5>', dap.continue, {})
-            vim.keymap.set('n', '<leader>bt', dap.toggle_breakpoint, { desc = 'Toggle breakpoint' })
-            vim.keymap.set('n', '<F6>', dap.continue, { desc = 'Start/Continue' })
-            vim.keymap.set('n', '<F8>', dap.step_over, { desc = 'Step Over' })
-            vim.keymap.set('n', '<F7>', dap.step_into, { desc = 'Step Into' })
-            vim.keymap.set('n', '<S-F7>', dap.step_out, { desc = 'Step Out' })
-            vim.keymap.set('n', '<leader>B', function()
-                dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-            end, { desc = 'Debug: Set Breakpoint' })
-        end
-    }
+            vim.keymap.set("n", "<F5>", dap.continue, {})
+            vim.keymap.set("n", "<leader>bt", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
+            vim.keymap.set("n", "<F6>", dap.continue, { desc = "Start/Continue" })
+            vim.keymap.set("n", "<F8>", dap.step_over, { desc = "Step Over" })
+            vim.keymap.set("n", "<F7>", dap.step_into, { desc = "Step Into" })
+            vim.keymap.set("n", "<S-F7>", dap.step_out, { desc = "Step Out" })
+            vim.keymap.set("n", "<leader>B", function()
+                dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+            end, { desc = "Debug: Set Breakpoint" })
+        end,
+    },
 }

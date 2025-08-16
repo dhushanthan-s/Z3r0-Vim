@@ -12,14 +12,13 @@ return {
     },
     config = function()
         local wk = require("which-key")
-        wk.setup {
+        wk.setup({
             -- your configuration comes here
             -- or leave it empty to use the default settings
             -- refer to the configuration section below
-        }
+        })
         wk.add({
             -- ["k"] = { "<cmd>bdelete<CR>", "Kill Buffer" },
-
         })
     end,
 }

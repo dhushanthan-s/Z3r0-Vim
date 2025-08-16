@@ -1,19 +1,19 @@
 return {
-    'RaafatTurki/corn.nvim', -- https://github.com/RaafatTurki/corn.nvim
-    config = function ()
+    "RaafatTurki/corn.nvim", -- https://github.com/RaafatTurki/corn.nvim
+    config = function()
         -- defaults
-        require('corn').setup {
+        require("corn").setup({
             -- enables plugin auto commands
             auto_cmds = true,
 
             -- sorts diagnostics according to a criteria. must be one of `severity`, `severity_reverse`, `column`, `column_reverse`, `line_number` or `line_number_reverse`
-            sort_method = 'severity',
+            sort_method = "severity",
 
             -- sets the scope to be searched for diagnostics, must be one of `line` or `file`
-            scope = 'line',
+            scope = "line",
 
             -- sets the style of the border, must be one of `single`, `double`, `rounded`, `solid`, `shadow` or `none`
-            border_style = 'single',
+            border_style = "single",
 
             -- sets which vim modes corn isn't allowed to render in, should contain strings like 'n', 'i', 'v', 'V' .. etc
             blacklisted_modes = {},
@@ -52,6 +52,6 @@ return {
                 -- toggle virtual_text diags when corn is toggled
                 vim.diagnostic.config({ virtual_text = not vim.diagnostic.config().virtual_text })
             end,
-        }
-    end
+        })
+    end,
 }
