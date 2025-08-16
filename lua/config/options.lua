@@ -98,3 +98,8 @@ if vim.g.neovide then
     vim.g.neovide_input_macos_option_key_is_meta = 'only_left'
     vim.g.neovide_remember_window_size = true
 end
+
+-- Enable filetype plugin
+vim.cmd([[
+    filetype plugin on
+]])
