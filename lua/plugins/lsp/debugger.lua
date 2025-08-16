@@ -61,7 +61,7 @@ return {
                 command = '/usr/bin/lldb-vscode', -- adjust as needed, must be absolute path
                 name = 'lldb'
             }
-            -- DAP for Rust 
+            -- DAP for Rust
             dap.adapters.rust = {
                 type = "lldb",
                 command = "lldb-vscode",

@@ -7,7 +7,7 @@ return {
             keys = 'etovxqpdygfblzhckisuran'
         }
         local hop = require('hop')
-        local directions = require('hop.hint').HintDirection
+        -- local directions = require('hop.hint').HintDirection
 
         -- Example
         -- vim.keymap.set('n', 't', function()

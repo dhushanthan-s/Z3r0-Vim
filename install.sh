@@ -15,25 +15,26 @@ fi
 # Ensure parent folder exists
 mkdir -p "$(dirname "$NVIM_CONFIG_DIR")"
 
-# List of config files/folders to symlink
-INCLUDES=(
-  init.lua
-  lua
-  ftplugin
-)
-
-# Symlink each allowed entry
-for item in "${INCLUDES[@]}"; do
-  SRC="$CONFIG_REPO_DIR/$item"
-  DEST="$NVIM_CONFIG_DIR/$item"
-
-  if [ -e "$SRC" ]; then
-    ln -sf "$SRC" "$DEST"
-    echo "🔗 Linked $SRC → $DEST"
-  fi
-done
+# # List of config files/folders to symlink
+# INCLUDES=(
+#   init.lua
+#   lua
+#   ftplugin
+# )
+#
+# # Symlink each allowed entry
+# for item in "${INCLUDES[@]}"; do
+#   SRC="$CONFIG_REPO_DIR/$item"
+#   DEST="$NVIM_CONFIG_DIR/$item"
+#
+#   if [ -e "$SRC" ]; then
+#     ln -sf "$SRC" "$DEST"
+#     echo "🔗 Linked $SRC → $DEST"
+#   fi
+# done
 
 echo "Linked $CONFIG_REPO_DIR -> $NVIM_CONFIG_DIR"
+ln -sf "$CONFIG_REPO_DIR" "$NVIM_CONFIG_DIR"
 
 # Ensure lazy.nvim is installed
 LAZY_PATH="$HOME/.local/share/nvim/lazy/lazy.nvim"

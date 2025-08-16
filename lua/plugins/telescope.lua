@@ -41,7 +41,7 @@ return {
                 -- Path where project.nvim will store the project history for use in
                 -- telescope
                 datapath = vim.fn.stdpath("data"),
-            }) 
+            })
         end
     },
     {
@@ -54,7 +54,7 @@ return {
             vim.keymap.set("n", "<leader>FF", function ()
                 builtin.find_files {
                     hidden = true
-                } 
+                }
             end, { desc = "Search files with hidden files", noremap = true, silent = true })
             vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Search code", noremap = true, silent = true })
             vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "Find Reference", noremap = true, silent = true })
@@ -70,6 +70,19 @@ return {
         'nvim-telescope/telescope-ui-select.nvim', -- https://github.com/nvim-telescope/telescope-ui-select.nvim
         config = function ()
             require("telescope").setup({
+                defaults = {
+                    file_ignore_patterns = {
+                        "node_modules/",
+                        ".git/",
+                        "target/",
+                        ".nvim/",
+                        ".vscode/",
+                        ".idea/",
+                        ".gradle/",
+                        ".zed/",
+                        "pycache/"
+                    }
+                },
                 extensions = {
                     ["ui-select"] = {
                         require("telescope.themes").get_dropdown {
