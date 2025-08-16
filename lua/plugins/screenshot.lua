@@ -23,18 +23,33 @@ return {
                     padding_horizontal = "0px",
                     padding_vertical = "0px",
                 },
-            }
+            },
         },
-        config = function ()
-            vim.keymap.set("v", "<leader>cn", ":CarbonNow<CR>", { desc = "Carbon Now screenshot", silent = true })
-        end
+        config = function()
+            vim.keymap.set(
+                "v",
+                "<leader>cn",
+                ":CarbonNow<CR>",
+                { desc = "Carbon Now screenshot", silent = true }
+            )
+        end,
     },
     {
         "mistricky/codesnap.nvim", -- https://github.com/mistricky/codesnap.nvim
         build = "make build_generator",
         keys = {
-            { "<leader>cc", "<cmd>CodeSnap<cr>", mode = "x", desc = "Save selected code snapshot into clipboard" },
-            { "<leader>cs", "<cmd>CodeSnapSave<cr>", mode = "x", desc = "Save selected code snapshot in ~/Pictures" },
+            {
+                "<leader>cc",
+                "<cmd>CodeSnap<cr>",
+                mode = "x",
+                desc = "Save selected code snapshot into clipboard",
+            },
+            {
+                "<leader>cs",
+                "<cmd>CodeSnapSave<cr>",
+                mode = "x",
+                desc = "Save selected code snapshot in ~/Pictures",
+            },
         },
         opts = {
             save_path = "~/Pictures",

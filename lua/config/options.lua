@@ -68,7 +68,6 @@ vim.opt.cursorline = true
 -- wrap lines
 vim.opt.wrap = false
 
-
 -- Ignores case for autocomplete in command `:`
 vim.opt.ignorecase = true
 
@@ -82,7 +81,7 @@ vim.cmd([[
 ]])
 
 -- ensure virtual_text diags are disabled
-vim.diagnostic.config { virtual_text = false }
+vim.diagnostic.config({ virtual_text = false })
 
 -- Neovide options
 if vim.g.neovide then
@@ -95,7 +94,7 @@ if vim.g.neovide then
     -- vim.g.neovide_opacity = 0.0
     vim.g.transparency = 0.8
     -- vim.g.neovide_fullscreen = true
-    vim.g.neovide_input_macos_option_key_is_meta = 'only_left'
+    vim.g.neovide_input_macos_option_key_is_meta = "only_left"
     vim.g.neovide_remember_window_size = true
 end
 

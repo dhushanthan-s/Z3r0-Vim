@@ -17,11 +17,16 @@ return {
             xml = { "xmlformat" },
             json = { "prettierd" },
             python = { "black" },
-            yaml = { "prettierd" }
-        }
+            yaml = { "prettierd" },
+        },
     },
     keys = {
-        { "<leader>F", function()
-            require("conform").format() end, desc = "Format current buffer"}
-    }
+        {
+            "<leader>F",
+            function()
+                require("conform").format()
+            end,
+            desc = "Format current buffer",
+        },
+    },
 }

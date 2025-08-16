@@ -1,16 +1,16 @@
 return {
     {
-        'numToStr/Comment.nvim', -- https://github.com/numToStr/Comment.nvim
+        "numToStr/Comment.nvim", -- https://github.com/numToStr/Comment.nvim
         lazy = false,
-        config = function ()
+        config = function()
             local config = require("Comment")
             config.setup({
-                pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+                pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
             })
-        end
+        end,
     },
     {
-        'JoosepAlviste/nvim-ts-context-commentstring', -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
+        "JoosepAlviste/nvim-ts-context-commentstring", -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
     },
     {
         "folke/todo-comments.nvim",
@@ -65,7 +65,7 @@ return {
                 info = { "DiagnosticInfo", "#2563EB" },
                 hint = { "DiagnosticHint", "#10B981" },
                 default = { "Identifier", "#7C3AED" },
-                test = { "Identifier", "#FF00FF" }
+                test = { "Identifier", "#FF00FF" },
             },
             search = {
                 command = "rg",
@@ -81,6 +81,6 @@ return {
                 pattern = [[\b(KEYWORDS):]], -- ripgrep regex
                 -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
             },
-        }
-    }
+        },
+    },
 }
