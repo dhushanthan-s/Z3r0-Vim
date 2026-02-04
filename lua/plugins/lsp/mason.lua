@@ -29,12 +29,7 @@ return {
         "neovim/nvim-lspconfig", -- https://github.com/neovim/nvim-lspconfig
         config = function()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            local lspconfig = require("lspconfig")
             local opts = { noremap = true, silent = true }
-            lspconfig.lua_ls.setup({
-                capabilities = capabilities,
-            })
-            -- TODO: add more lsp configs
 
             local on_attach = function(client, bufnr)
                 local function buf_set_keymap(...)
@@ -89,7 +84,10 @@ return {
             -- map buffer local keybindings when the language server attaches
             local servers = { "pyright", "rust_analyzer", "bashls", "quick_lint_js" }
             for _, lsp in ipairs(servers) do
-                lspconfig[lsp].setup({ on_attach = on_attach })
+                vim.lsp.config(lsp, {
+                    on_attach = on_attach,
+                    capabilities = capabilities,
+                })
             end
 
             -- vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
