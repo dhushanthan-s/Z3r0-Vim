@@ -15,19 +15,19 @@ return {
         priority = 1000, -- https://github.com/catppuccin/nvim
         config = function()
             require("catppuccin").setup({
-                flavor = "mocha",
+                flavour = "mocha",
                 transparent_background = true,
                 integrations = {
                     cmp = true,
-                    nvimtree = true,
                     treesitter = true,
-                    telescope = {
-                        enabled = true,
-                    },
+                    bufferline = true,
+                    feline = true,
+                    telescope = true,
                     alpha = true,
                     mason = false,
                     dap = true,
                     dap_ui = true,
+                    nvimtree = true,
                     native_lsp = {
                         enabled = true,
                         virtual_text = {
@@ -48,6 +48,13 @@ return {
                     },
                     which_key = false,
                 },
+                custom_highlights = function(colors)
+                    return {
+                        -- Only override if NOT transparent
+                        BufferLineFill = { bg = colors.none },
+                        BufferLineBackground = { fg = colors.text },
+                    }
+                end,
             })
             vim.cmd.colorscheme("catppuccin")
         end,
