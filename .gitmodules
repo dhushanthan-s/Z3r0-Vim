@@ -1,0 +1,3 @@
+[submodule "docs"]
+	path = docs
+	url = https://github.com/dhushanthan-s/Z3r0-Vim.wiki.git
