@@ -95,3 +95,257 @@ Full keybind reference: **[docs/KEYBINDS.md](docs/KEYBINDS.md)**
 | **MeanderingProgrammer/render-markdown.nvim** | Rendered Markdown (headings, code blocks, checkboxes, etc.) |
 | **mfussenegger/nvim-jdtls** | Java LSP (Eclipse JDT) |
 | **mrcjkb/rustaceanvim** | Rust LSP and tools (rust-analyzer, hover, code actions) |
+
+
+# Keybinds Reference
+
+This document lists all keybinds defined in the Z3r0-Vim Neovim configuration.
+
+## Modifier notation
+
+| Notation | Meaning |
+|----------|---------|
+| `<leader>` | **Space** |
+| `<C>` | Control (Ctrl) |
+| `<A>` | Alt (Option on Mac) |
+| `<S>` | Shift |
+| `<M>` | Meta / Win / Command |
+
+---
+
+## Basic operations
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `<leader>w` | n | Save file |
+| `<leader>q` | n | Quit (with confirm) |
+| `<leader>Q` | n | Quit all (with confirm) |
+| `<leader>n` | n | New file (`:enew`) |
+| `<C-s>` | n | Force save |
+| `<C-q>` | n | Force quit all |
+| `<leader>v` | n | Vertical split |
+| `<leader>h` | n | Horizontal split |
+
+---
+
+## Window navigation
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `<C-h>` | n, t | Go to left window |
+| `<C-j>` | n, t | Go to bottom window |
+| `<C-k>` | n, t | Go to top window |
+| `<C-l>` | n, t | Go to right window |
+
+In terminal mode (`t`), these exit terminal focus first, then move.
+
+---
+
+## Window resize
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `<C-Up>` | n | Decrease height (resize -2) |
+| `<C-Down>` | n | Increase height (resize +2) |
+| `<C-Left>` | n | Decrease width (vertical resize -2) |
+| `<C-Right>` | n | Increase width (vertical resize +2) |
+
+---
+
+## Buffers
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `<S-h>` | n | Previous buffer |
+| `<S-l>` | n | Next buffer |
+
+---
+
+## Insert mode
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `jk` | i | Exit insert mode (Esc) |
+
+---
+
+## Visual / Visual block mode
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `<` | v | Indent left (stay in indent) |
+| `>` | v | Indent right (stay in indent) |
+| `<A-j>` | v | Move selection down |
+| `<A-k>` | v | Move selection up |
+| `p` | v | Paste without yanking (replace) |
+| `J` | x | Move block down |
+| `K` | x | Move block up |
+| `<A-j>` | x | Move block down |
+| `<A-k>` | x | Move block up |
+
+---
+
+## File explorer & search (Telescope)
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `<leader>e` | n | Toggle file tree (NvimTree) |
+| `<leader>ff` | n | Search files |
+| `<leader>FF` | n | Search files (including hidden) |
+| `<leader>fg` | n | Live grep (search in files) |
+| `<leader>fr` | n | LSP: find references |
+| `<leader>fd` | n | LSP: find definitions |
+| `<leader>fi` | n | LSP: find implementations |
+
+---
+
+## Hop (motion / easymotion)
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `<leader><leader>f` | n | Hop to a character |
+| `<leader><leader>F` | n | Hop to a character (any buffer) |
+| `s` | n | Hop to 2 matching characters |
+| `<leader><leader>e` | n | Hop to any word |
+| `<leader><leader>E` | n | Hop to any word (any buffer) |
+| `<leader><leader>l` | n | Hop to any line |
+| `<leader><leader>L` | n | Hop to any line (skip whitespace) |
+
+---
+
+## Git (Gitsigns)
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `]c` | n | Next hunk / diff change |
+| `[c` | n | Previous hunk / diff change |
+| `<leader>hs` | n, v | Stage hunk |
+| `<leader>hr` | n, v | Reset hunk |
+| `<leader>gS` | n | Stage buffer |
+| `<leader>gu` | n | Unstage current hunk |
+| `<leader>gR` | n | Reset buffer |
+| `<leader>gp` | n | Preview hunk |
+| `<leader>gB` | n | Git blame (full) |
+| `<leader>gb` | n | Toggle line blame |
+| `<leader>gd` | n | Open git diff view |
+| `<leader>hD` | n | Diff against `~` |
+| `<leader>td` | n | Toggle deleted lines |
+| `ih` | o, x | Text object: inner hunk |
+
+---
+
+## LazyGit
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `<leader>gg` | n | Open LazyGit |
+
+---
+
+## LSP (buffer-local when LSP attaches)
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `gD` | n | Go to declaration |
+| `gd` | n | Go to definition |
+| `K` | n | Hover |
+| `<leader>i` | n | Go to implementation |
+| `<C-k>` | n | Signature help |
+| `<leader>wa` | n | Add workspace folder |
+| `<leader>wr` | n | Remove workspace folder |
+| `<leader>wl` | n | List workspace folders |
+| `<leader>D` | n | Type definition |
+| `<leader>rn` | n | Rename |
+| `<leader>ca` | n | Code action |
+| `gr` | n | References |
+| `<leader>E` | n | Open diagnostic float |
+| `[d` | n | Previous diagnostic |
+| `]d` | n | Next diagnostic |
+| `q` | n | Set location list from diagnostics |
+| `<leader>f` | n | Format (LSP) |
+
+**Rust (rustaceanvim, buffer-local):**
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `<leader>a` | n | Rust LSP code action (grouped) |
+| `K` | n | Rust LSP hover + actions |
+
+---
+
+## Formatting
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `<leader>F` | n | Format current buffer (Conform) |
+
+---
+
+## Completions (nvim-cmp)
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `<C-b>` | i | Scroll docs up |
+| `<C-f>` | i | Scroll docs down |
+| `<C-Space>` | i | Trigger completion |
+| `<C-e>` | i | Abort completion |
+| `<CR>` | i | Confirm selection |
+
+---
+
+## Debugger (DAP)
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `<F5>` | n | Start / continue |
+| `<F6>` | n | Start / continue |
+| `<leader>bt` | n | Toggle breakpoint |
+| `<F8>` | n | Step over |
+| `<F7>` | n | Step into |
+| `<S-F7>` | n | Step out |
+| `<leader>B` | n | Set conditional breakpoint |
+
+---
+
+## Screenshots / code snapshots
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `<leader>cn` | v | Carbon Now (selection → Carbon image) |
+| `<leader>cc` | x | CodeSnap: copy snapshot to clipboard |
+| `<leader>cs` | x | CodeSnap: save snapshot to `~/Pictures` |
+
+---
+
+## Treesitter (incremental selection & textobjects)
+
+| Keybind | Mode | Action |
+|---------|------|--------|
+| `<leader>ss` | n | Init selection (incremental) |
+| `<leader>si` | n | Node incremental |
+| `<leader>sc` | n | Scope incremental |
+| `<leader>sd` | n | Node decremental |
+| `]m` / `]M` | n | Next function start / end |
+| `[m` / `[M` | n | Previous function start / end |
+| `]]` / `][` | n | Next / end of class |
+| `[[` / `[]` | n | Previous class start / end |
+| `]o` | n | Next loop |
+| `]s` | n | Next scope (locals) |
+| `]z` | n | Next fold |
+| `]d` / `[d` | n | Next / previous conditional |
+
+---
+
+## Comments
+
+Comment.nvim uses its default keybinds (no overrides in config):
+
+- **Line comment:** `gcc` (toggle), `[count]gcc`
+- **Block comment:** `gbc` (toggle), `[count]gbc`
+- **Visual:** `gc` (toggle line/block depending on selection)
+
+---
+
+## Alpha dashboard
+
+When the dashboard is shown, the on-screen buttons use single keys (e.g. `f` find file, `e` new file, `p` find project, `r` recent files, `t` find text, `c` config, `q` quit). These are not global keybinds; they only work when the dashboard is focused.
