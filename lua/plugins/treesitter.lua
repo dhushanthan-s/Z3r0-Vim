@@ -1,6 +1,9 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter", -- https://github.com/nvim-treesitter/nvim-treesitter
+        -- Use legacy `master`: default `main` is a breaking rewrite (no `nvim-treesitter.configs`).
+        -- nvim-treesitter-textobjects (master) still requires that API.
+        branch = "master",
         build = ":TSUpdate",
         config = function()
             local config = require("nvim-treesitter.configs")
@@ -98,5 +101,6 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects", -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
     },
 }
